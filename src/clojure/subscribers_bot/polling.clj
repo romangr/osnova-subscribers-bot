@@ -1,3 +1,5 @@
+; © https://github.com/Otann/morse/ Eclipse Public License 1.0
+
 (ns subscribers-bot.polling
   "Declares long-polling routines to communicate with Telegram Bot API"
   (:require [clojure.tools.logging :as log]
@@ -38,11 +40,11 @@
               (close! updates))
 
           ::wait-timeout
-          (do (log/error "HTTP request timed out, stopping polling")
+          (do (log/error "HTTP request timed out")
               (recur offset))
 
           ::api/error
-          (do (log/warn "Got error from Telegram API, stopping polling")
+          (do (log/warn "Got error from Telegram API")
               (recur offset))
 
           (do (close! wait-timeout)

@@ -7,5 +7,10 @@
                  [morse "0.4.3"]
                  [org.clojure/java.jdbc "0.7.12"]
                  [org.xerial/sqlite-jdbc "3.36.0.3"]
-                 [clj-http "3.12.3"]]
+                 [clojurewerkz/quartzite "2.1.0"]
+                 [commons-lang/commons-lang "2.0"]
+                 [org.slf4j/slf4j-log4j12 "1.7.32"]]
+  :resource-paths ["src/resources"]
+  :java-source-paths ["src/java"]
+  :source-paths ["src/clojure"]
   :repl-options {:init-ns subscribers-bot.core})
