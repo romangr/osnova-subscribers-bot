@@ -11,7 +11,7 @@
    :subname     db-file-path
    })
 
-(def db-file-path (or (System/getenv "DB_FILE_PATH") "local.db"))
+(def db-file-path (or (System/getenv "DB_FILE_PATH") "./db/local.db"))
 
 (def db (database db-file-path))
 

@@ -60,9 +60,9 @@
                               ; This could be done in form of a function:
                               (h/command-fn "start" #(start-handler db %))
                               (h/command-fn "help" #(start-handler db %))
-                              (h/command-fn "disableTJ" #(disable-tj scheduler db %))
-                              (h/command-fn "disableDTF" #(disable-dtf scheduler db %))
-                              (h/command-fn "disableVC" #(disable-vc scheduler db %))
+                              (h/command-fn "disable_tj" #(disable-tj scheduler db %))
+                              (h/command-fn "disable_dtf" #(disable-dtf scheduler db %))
+                              (h/command-fn "disable_vc" #(disable-vc scheduler db %))
                               ;(h/command-fn "enable" enable-handler)
 
                               ; Handlers will be applied until there are any of those
