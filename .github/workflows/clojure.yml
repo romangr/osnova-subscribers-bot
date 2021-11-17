@@ -1,0 +1,38 @@
+name: Clojure CI
+
+on:
+  push:
+    branches: [ master ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install dependencies
+      run: lein deps
+      
+    - name: Install dependencies
+      run: lein uberjar
+      
+    - name: Docker Login
+      uses: docker/login-action@v1.10.0
+      with:
+        # Server address of Docker registry. If not set then will default to Docker Hub
+        registry: ghcr.io
+        # Username used to log against the Docker registry
+        username: ${{ github.actor }}
+        # Password or personal access token used to log against the Docker registry
+        password: ${{ secrets.GITHUB_TOKEN }}
+          
+    - name: Docker build image
+      run: docker build -t ghcr.io/romangr/osnova-subscribers-bot:latest .
+        
+    - name: Docker push image
+      run: docker push ghcr.io/romangr/osnova-subscribers-bot:latest
+      
