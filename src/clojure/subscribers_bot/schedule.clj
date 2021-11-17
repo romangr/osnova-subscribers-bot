@@ -31,7 +31,7 @@
 (defn trigger-key [request-id]
   (str "trigger." request-id))
 
-(def scheduler (-> (qs/initialize) qs/start))
+(defn get-scheduler [] (-> (qs/initialize) qs/start))
 
 (defn remove-job [scheduler request-id]
   (qs/delete-job scheduler (j/key (job-key request-id))))
@@ -50,8 +50,3 @@
                   (t/with-schedule (calendar-interval/schedule
                                      (calendar-interval/with-interval-in-days 1))))]
     (qs/schedule scheduler job trigger)))
-
-(defn -main []
-  (remove-job scheduler "f7df45a4-ca75-482f-bdff-319a1def8663")
-  (schedule-job scheduler db "f7df45a4-ca75-482f-bdff-319a1def8663")
-  )

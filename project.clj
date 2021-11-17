@@ -13,4 +13,6 @@
   :resource-paths ["src/resources"]
   :java-source-paths ["src/java"]
   :source-paths ["src/clojure"]
-  :repl-options {:init-ns subscribers-bot.core})
+  :repl-options {:init-ns subscribers-bot.core}
+  :main subscribers-bot.core
+  )
