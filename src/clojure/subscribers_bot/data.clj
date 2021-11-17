@@ -62,8 +62,8 @@
   (jdbc/query db ["select * from users where telegram_id = ?" telegram-id]))
 
 (defn get-report-request-by-user-id-and-site
-  [db user-id site site-user-id]
-  (jdbc/query db ["select * from report_requests as rr left join users on rr.user_id = users.id where users.id = ? and rr.site = ? and site_user_id = ?" user-id site site-user-id]))
+  [db user-id site]
+  (jdbc/query db ["select * from report_requests as rr left join users on rr.user_id = users.id where users.id = ? and rr.site = ?" user-id site]))
 
 (defn get-report-request-by-id
   [db id]
@@ -77,6 +77,10 @@
   (when (not-empty subscriber-ids)
     (let [ids (reduce #(str %1 "," %2) (map #(str "'" % "'") subscriber-ids))]
       (jdbc/execute! db [(str "DELETE FROM subscribers WHERE id in (" ids ")")]))))
+
+(defn delete-report-request-and-subscribers [db report-request-id]
+  (jdbc/execute! db ["DELETE FROM report_requests WHERE id = ?" report-request-id])
+  (jdbc/execute! db ["DELETE FROM subscribers WHERE report_request_id = ?" report-request-id]))
 
 
 (defn new-subscriber [report-request-id subscriber-site-id name]
