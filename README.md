@@ -1,10 +1,32 @@
 # subscribers-bot
 
-A Clojure library designed to ... well, that part is up to you.
+A telegram bot to notify TJ, VC and DTF users about their subscribers (currently - about users that have unsubscribed from their blog)
 
 ## Usage
 
-FIXME
+### Environment varibles
+
+```
+TELEGRAM_TOKEN=<telegram bot token>
+TJ_TOKEN=<API token>
+VC_TOKEN=<API token>
+DTF_TOKEN=<API token>
+DB_FILE_PATH=local.db
+```
+
+### Start docker container
+
+```
+docker run -d \
+  -m 256M \
+  --name osnova_subscribers_bot \
+  -v `pwd`/osnova_db/local.db:/bot/local.db \
+  --log-driver json-file \
+  --log-opt max-size=1m \
+  --log-opt max-file=3 \
+  --env-file osnova.env \
+  ghcr.io/romangr/osnova-subscribers-bot:latest
+```
 
 ## License
 
